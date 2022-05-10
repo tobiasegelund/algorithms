@@ -1,10 +1,10 @@
 class Node:
-    def __init__(self, val: int) -> None:
+    def __init__(self, val) -> None:
         self.val = val
         self.next = None
+        self.prev = None
 
-
-class LinkedList:
+class DoubleLinkedList:
     def __init__(self) -> None:
         self.head = None
 
@@ -15,6 +15,7 @@ class LinkedList:
             while last_node.next is not None:
                 last_node = last_node.next
 
+            node.prev = last_node
             last_node.next = node
         else:
             self.head = node
@@ -24,6 +25,15 @@ class LinkedList:
         while step is not None:
             print(step.val)
             step = step.next
+
+    def reverse_traversal(self) -> None:
+        last_node = self.head
+        while last_node.next is not None:
+            last_node = last_node.next
+
+        while last_node is not None:
+            print(last_node.val)
+            last_node = last_node.prev
 
     def pop(self) -> None:
         pass
@@ -42,12 +52,13 @@ class LinkedList:
 
 
 if __name__ == '__main__':
-    l = LinkedList()
+    l = DoubleLinkedList()
     l.append(20)
     l.append(10)
     l.append(50)
     l.append(60)
-    l.traversal()
+    # l.traversal()
+    l.reverse_traversal()
 
     # create cycle
     l.head.next.next.next.next = l.head
